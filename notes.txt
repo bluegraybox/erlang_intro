@@ -1,0 +1,10 @@
+What's cool about Erlang
+    Scalability, Performance
+        nine 9s uptime
+        1000s reqs/sec
+        spawning, mananging processes, IPC baked in
+        update code while running
+    Elegance
+        part of what's cool about Erlang is what's cool about functional languages
+
+
