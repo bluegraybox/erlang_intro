@@ -1,10 +1,24 @@
 What's cool about Erlang
-    Scalability, Performance
-        nine 9s uptime
-        1000s reqs/sec
-        spawning, mananging processes, IPC baked in
-        update code while running
-    Elegance
-        part of what's cool about Erlang is what's cool about functional languages
 
+Scalability, Performance
+    nine 9s uptime
+    1000s reqs/sec
+    spawning, mananging processes, IPC baked in
+    update code while running
+But what do I use it for
+    You don't want to be building applications like that in a language you don't know
+    I have trouble coming up with a project that needs all that
+Elegance
+    concise & expressive
+    part of what's cool about Erlang is what's cool about functional languages
+    special features
+Reading Erlang in 2 min
+    atom - :atom in Ruby, "atom" in Java (or global enumerated type?)
+    Variable - final
+    tuple - don't worry about it
+Overload
+    Java - by parameter number, type
+    Erlang - by value
+
+    _ - the "whatever" variable, like /dev/null for var assignments and * for matching
 

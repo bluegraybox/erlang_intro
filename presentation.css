@@ -1,4 +1,7 @@
-.credit, .credit a {
+.credit, .credit a, .aside {
     color: #888;
+}
+.credit, .credit a {
+    font-size: medium;
 }
 

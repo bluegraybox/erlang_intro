@@ -1,1 +1,3 @@
-{ "name": "Erlang Intro", "sections": [ {"section":"one"} ]}
+{ "name": "Erlang Intro", "sections": [
+    {"section":"one"}
+]}
