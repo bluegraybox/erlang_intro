@@ -22,3 +22,19 @@ Overload
 
     _ - the "whatever" variable, like /dev/null for var assignments and * for matching
 
+Procedural, OO, Functional
+    Procedural
+        Sequence of actions
+        Simple data structures
+        How people think about the world: narrative, fairly linear
+    OO
+        Things that do things, have behaviors
+        Focus on data structures & relations
+        How people understand parts of the world in isolation
+        Risk of Ravioli Code - narrative is lost
+    Functional
+        Mapping inputs to outputs
+        Not a normal human way to look at the world
+        Rewire your brain: cool, not as hard as it sounds
+    Math vs. Play Doh
+

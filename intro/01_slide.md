@@ -44,8 +44,10 @@
 !SLIDE bullets
 * [X, Y, Z] = [1, 2, 3]
 
-!SLIDE bullets
+!SLIDE bullets incremental
 * [First, Second | Rest] = [1, 2, 3, 4]
+* [First, Second | _ ] = [1, 2, 3, 4]
+* [First, Second | _Rest ] = [1, 2, 3, 4]
 
 !SLIDE center
 ![Overload](overload.jpg)
@@ -87,4 +89,7 @@
             error -> [];
             List -> List
         end
+
+!SLIDE
+# Whew!
 
