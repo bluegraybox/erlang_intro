@@ -6,14 +6,14 @@
 
 !SLIDE center
 ![Scalability](factory-crop.jpg)
-<span class="credit">*Image by [joguldi](http://www.flickr.com/photos/landschaft/)*</span>
+<span class="credit">*Image by [joguldi](http://www.flickr.com/photos/landschaft/1177773469/)*</span>
 
 !SLIDE
 # Ok, but what do I do with it?
 
 !SLIDE center
 ![Elegance](carving.jpg)
-<span class="credit">*Image by [Stephen A. Wolfe](http://www.flickr.com/photos/swolfe/)*</span>
+<span class="credit">*Image by [Stephen A. Wolfe](http://www.flickr.com/photos/swolfe/5800097543/)*</span>
 
 !SLIDE
 # Where are my curly braces?!
@@ -51,7 +51,7 @@
 
 !SLIDE center
 ![Overload](overload.jpg)
-<span class="credit">*Image by [Graeme Newcomb](http://www.flickr.com/photos/graemenewcomb/)*</span>
+<span class="credit">*Image by [Graeme Newcomb](http://www.flickr.com/photos/graemenewcomb/358329131/)*</span>
 
 !SLIDE code
         my_func(Param1) ->

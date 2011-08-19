@@ -1,6 +1,6 @@
 !SLIDE center
 ![Detour](detour.jpg)
-<span class="credit">*Image by [chrisdlugosz](http://www.flickr.com/photos/chrisdlugosz/)*</span>
+<span class="credit">*Image by [chrisdlugosz](http://www.flickr.com/photos/chrisdlugosz/2805048271/)*</span>
 
 !SLIDE code
         project
