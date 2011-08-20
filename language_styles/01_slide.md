@@ -1,5 +1,7 @@
 !SLIDE
-# Procedural, Object-Oriented, Functional
+# Procedural
+# Object-Oriented
+# Functional
 
 !SLIDE center
 ![Narrative](storytelling.jpg)
@@ -16,4 +18,13 @@
 !SLIDE bullets incremental
 # f(x)
 * *What does that even mean?*
+
+!SLIDE bullets incremental
+# Why?
+* 1 + 2 + 3 + 4 + 5 + ... + n
+* n(n+1)/2
+
+!SLIDE center
+![OO vs. Functional](play-doh.jpg)
+<span class="credit">*Image from [Yun Huang Yong](http://www.flickr.com/photos/goosmurf/3727530095/)*</span>
 

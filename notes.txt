@@ -1,42 +1,71 @@
 What's cool about Erlang
-
-Scalability, Performance
-    nine 9s uptime
-    1000s reqs/sec
-    spawning, mananging processes, IPC baked in
-    update code while running
-But what do I use it for
-    You don't want to be building applications like that in a language you don't know
-    I have trouble coming up with a project that needs all that
-Elegance
-    concise & expressive
-    part of what's cool about Erlang is what's cool about functional languages
-    special features
-Reading Erlang in 2 min
-    atom - :atom in Ruby, "atom" in Java (or global enumerated type?)
-    Variable - final
-    tuple - don't worry about it
-Overload
-    Java - by parameter number, type
-    Erlang - by value
-
-    _ - the "whatever" variable, like /dev/null for var assignments and * for matching
+    Scalability, Performance
+        nine 9s uptime
+        1000s reqs/sec
+        spawning, mananging processes, IPC baked in
+        update code while running
+    But what do I use it for
+        how do I get started?
+        You don't want to be building applications like that in a language you don't know
+        I have trouble coming up with a project that needs all that
+    Elegance
+        concise & expressive
+        part of what's cool about Erlang is what's cool about functional languages
+        special features - invert conventional view: what makes it strange makes it beautiful
 
 Procedural, OO, Functional
+        programming styles
+        most languages are mutts
     Procedural
         Sequence of actions
         Simple data structures
         How people think about the world: narrative, fairly linear
-    OO
-        Things that do things, have behaviors
+        functions are like anecdotes
+        C is procedural; Perl is procedural with OO bolted on
+    OO - Things that do things, have behaviors
         Focus on data structures & relations
         How people understand parts of the world in isolation
+        functions are still anecdotes
+    OO - Define relations between objects
         Risk of Ravioli Code - narrative is lost
+        Ruby is OO with functional features
     Functional
         Mapping inputs to outputs
         Not a normal human way to look at the world
-        Rewire your brain: cool, not as hard as it sounds
+        more like doing proofs
+        Rewire your brain: cool, not as hard as it sounds, "math revelation payoff"
+        De Morgan's laws
+    Why?
     Math vs. Play Doh
+        procedural like rambing stories
+        OO - lots of structure for the sake of structure; complexity begets complexity
+            easy to write lot of code - "Wait, what was the question?"
+        functional - focus: inputs & outputs
+        ok, enough philosophizing
+
+Reading Erlang in 2 min
+    Where are my curly braces?
+        "weird" = "doesn't look like C," unlike Pascal, Java, Javascript, Php, Perl, Python, Ruby
+    comment
+    atom - :atom in Ruby, Enum in Java
+    Variable - Java final
+    tuple - don't worry about it
+    function - return atom
+    assignment - this is not a... , it's a pattern match
+    multi-assign
+    list splitting (double tap)
+Function Overloading, and why these features are cool
+    Java - by parameter number
+    Java - by type
+    Erlang - by parameter number
+    Erlang - by value
+    Erlang - with guards!
+        again, you're mapping inputs to outputs
+        let you differentiate inputs, takes input matching a step further
+        makes functions more declarative
+    if - implicit elseif else
+    case: not just switch - pattern match
+    case - file open
 
 Indent Parser
     Detour
