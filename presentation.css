@@ -4,4 +4,7 @@
 .credit, .credit a {
     font-size: medium;
 }
+.error {
+    color: red;
+}
 

@@ -38,3 +38,51 @@ Procedural, OO, Functional
         Rewire your brain: cool, not as hard as it sounds
     Math vs. Play Doh
 
+Indent Parser
+    Detour
+        First looked at Erlang ~3 years ago: cool, but what do I do with it?
+        GTD task list: store in markup, parse
+    project tree
+    task markup
+    input lines
+    output structure
+    Ruby
+        data structures: Parser, Lines, Trees, Nodes, Leaves
+    tree walk 1-5
+    command-line
+        output leaf nodes with paths
+    Hackers & Painters
+        essays by Paul Graham of y-combinator, hacker news
+        transliterate Ruby to Lisp
+        this is basically a recursive problem
+    Train wreck
+        lost track of where I was in tree and where I was in input - mismatches
+        felt very square peg/round hole
+        What's Lisp-y? Recursion! How?
+        recursion - when a function calls itself
+        break the problem into self-similar pieces
+        what does that look like?
+    Java iteration
+        simpler example
+    Ruby iteration
+    Ruby list comprehension
+        map your list to a new list where each thing has had stuff done to it
+        this is Ruby showing its Lisp influences
+    Erlang recursion 1
+    Erlang recursion 2
+    Thinker
+        back to the problem at hand
+        think think think
+    Depair
+        give up, go to bed; a-ha!
+    recursive 1
+        at first node, break the rest of the data into Your Children and Not-
+        I have children, and I'm the first of my siblings
+        do this at each node
+    recursive 2 & 3
+        what does the code look like? hold on; we don't have time for me to teach you to read Lisp
+    Erlang: A Kinder, Gentler Lisp?
+        hey, Erlang is also a functional language
+        translation was easy
+        reworked to use pattern matching and guard idioms: nicer!
+

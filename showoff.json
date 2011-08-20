@@ -1,5 +1,5 @@
 { "name": "Erlang Intro", "sections": [
     {"section":"intro"},
-    {"section":"parser"},
-    {"section":"language_styles"}
+    {"section":"language_styles"},
+    {"section":"parser"}
 ]}

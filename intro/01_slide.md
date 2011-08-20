@@ -45,7 +45,9 @@
 * [X, Y, Z] = [1, 2, 3]
 
 !SLIDE bullets incremental
-* [First, Second | Rest] = [1, 2, 3, 4]
+## [First, Second | Rest] = [1, 2, 3, 4]
+* [First, Second | Rest] = [1, 2]
+* <span class="error">[First, Second] = [1, 2, 3, 4]</span>
 * [First, Second | _ ] = [1, 2, 3, 4]
 * [First, Second | _Rest ] = [1, 2, 3, 4]
 
