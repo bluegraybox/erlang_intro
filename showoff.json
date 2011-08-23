@@ -1,5 +1,8 @@
 { "name": "Erlang Intro", "sections": [
     {"section":"intro"},
+    {"section":"language_styles"},
+    {"section":"syntax"},
     {"section":"parser"},
-    {"section":"language_styles"}
+    {"section":"bowling"},
+    {"section":"wrapup"}
 ]}
