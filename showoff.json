@@ -2,5 +2,7 @@
     {"section":"intro"},
     {"section":"language_styles"},
     {"section":"syntax"},
-    {"section":"parser"}
+    {"section":"parser"},
+    {"section":"bowling"},
+    {"section":"wrapup"}
 ]}

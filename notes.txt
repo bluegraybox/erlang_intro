@@ -12,6 +12,7 @@ What's cool about Erlang
         concise & expressive
         part of what's cool about Erlang is what's cool about functional languages
         special features - invert conventional view: what makes it strange makes it beautiful
+        escript - who knew?
 
 Procedural, OO, Functional
         programming styles
@@ -45,34 +46,42 @@ Procedural, OO, Functional
 
 Reading Erlang in 2 min
     Where are my curly braces?
-        "weird" = "doesn't look like C," unlike Pascal, Java, Javascript, Php, Perl, Python, Ruby
+        "weird" = "doesn't look like C," unlike Java, Javascript, C#, Php, Perl, Python, Ruby
     comment
-    atom - :atom in Ruby, Enum in Java
+    atom - lowercase; :atom in Ruby, Enum in Java
     Variable - Java final
-    tuple - don't worry about it
-    function - return atom
-    assignment - this is not a... , it's a pattern match
+        assignment - this is not a... , it's a pattern match
+    list, tuple - don't worry about it
     multi-assign
     list splitting (double tap)
+    function - return atom
+    f(x)
+        to mathematicians, this is awesome
+
 Function Overloading, and why these features are cool
-    Java - by parameter number
-    Java - by type
-    Erlang - by parameter number
-    Erlang - by value
-    Erlang - with guards!
+    by parameter number
+    by value
+    with guards!
         again, you're mapping inputs to outputs
         let you differentiate inputs, takes input matching a step further
         makes functions more declarative
+        "for input of this type, this is what I do"
+        we'll get into the Why? of this later
     if - implicit elseif else
     case: not just switch - pattern match
+        List is unbound
     case - file open
+        this is why you don't see a lot of try/catch exception handling
+    escript - hello world
+    escript - option handling
 
 Indent Parser
     Detour
         First looked at Erlang ~3 years ago: cool, but what do I do with it?
         GTD task list: store in markup, parse
     project tree
-    task markup
+    action markup
+        easy to read, review, edit; script extracts next actions
     input lines
     output structure
     Ruby
@@ -98,9 +107,12 @@ Indent Parser
         map your list to a new list where each thing has had stuff done to it
         this is Ruby showing its Lisp influences
     Erlang recursion 1
+        how do I move to the next element in the list?
     Erlang recursion 2
+        how do I start? what do I do when I get to the end?
+        recursion in OO/procedural is rare and tricky; in functional, it's common and easy
     Thinker
-        back to the problem at hand
+        back to the problem at hand - how do I do this thing recursively
         think think think
     Depair
         give up, go to bed; a-ha!
@@ -112,6 +124,50 @@ Indent Parser
         what does the code look like? hold on; we don't have time for me to teach you to read Lisp
     Erlang: A Kinder, Gentler Lisp?
         hey, Erlang is also a functional language
+        escript!
         translation was easy
         reworked to use pattern matching and guard idioms: nicer!
+    Erlang build_nodes
+        list of lines in
+        create a node that knows its children, and put it at the front of a list of its siblings
+    Erlang split_list
+        like the earlier recursion, except we're not changing the elements, but we are stopping at some point
+
+Bowling
+    Scoring
+        Spares & Strikes
+        OO awkwardness: Rolls sorta belong to frames, but may be counted for more than one
+        Procedural: order matters
+    Python
+        Game, Frame - smart objects
+        53 LOC; it'd be longer in Java, just by the time you'd put in the curly braces
+        tests: ~150 LOC
+        felt pretty happy with it
+    Erlang
+        11 lines
+        frame takes frame number, current score, remaining rolls
+        consumes rolls, boosts score, recurses
+        17 lines after handling invalid input, incomplete games
+    Test code
+        unit test framework? why bother?
+        erlang functional test is simpler than the python unit tests
+
+Mirror
+    Python now: "It's clearly very busy, but what is it doing?!"
+    ambiguous responsibility - who does what? who checks for bad data? everyone!
+    model possible interactions, not actual
+    easy to write a lot of "what if" code; let alone Java
+    mind-altering, without that William Hurt turning into a monkey thing
+Erlang is elegant & natural
+    it's a little weird at first, but embrace the weirdness, and it starts to feel natural in a surprisingly short time
+    patterns & idioms
+    I've only written a couple hundred lines of Erlang
+Erlang is fun
+    little brain chemical reward signals
+You can start small
+Know that you're writing code that will scale
+    parser: new process for children and siblings add 2 lines of code
+        function call becomes spawn & receive, which are essentially one-line commands
+The End!
+Me
 

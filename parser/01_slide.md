@@ -4,14 +4,14 @@
 
 !SLIDE code
         project
-            task
+            action
             sub-project
-                task
-            task
+                action
+            action
         project
             sub-project
                 sub-project
-                    task
+                    action
 
 !SLIDE bullets small
 * work on presentation [computer, quiet] (2011-08-24) !!
@@ -60,26 +60,26 @@
 <span class="credit">*Image from [IMLS DCC](http://www.flickr.com/photos/imlsdcc/5576592397/)*</span>
 
 !SLIDE small
-        String[] process(String[] list) {
-            String[] output = new String[list.length];
-            for (int i=0; i < list.length; i++) {
-                output[i] = do_stuff(list[i]);
+        String[] process(String[] input) {
+            String[] output = new String[input.length];
+            for (int i=0; i < input.length; i++) {
+                output[i] = do_stuff(input[i]);
             }
             return output;
         }
 
 !SLIDE small
-        def process(list)
+        def process(input)
             output = []
-            list.each() { |thing|
+            input.each() { |thing|
                 output.put(do_stuff(thing))
             }
             output
         end
 
 !SLIDE small
-        def process(list)
-            list.map { |thing| do_stuff(thing) }
+        def process(input)
+            input.map { |thing| do_stuff(thing) }
         end
 
 !SLIDE
@@ -88,6 +88,8 @@
             process([NewFirst|Output], Rest);
 
 !SLIDE
+        Output = process([], Input).
+
         process(Output, [First|Rest]) ->
             NewFirst = do_stuff(First),
             process([NewFirst|Output], Rest);
@@ -120,7 +122,7 @@
     -record(node, {content, children}).
 
     build_nodes([First|Rest]) ->
-        [ChildLines, SiblingLines] =
+        {ChildLines, SiblingLines} =
             split_list(First#line.indent, [], Rest),
         Children = build_nodes(ChildLines),
         Siblings = build_nodes(SiblingLines),
@@ -128,3 +130,16 @@
         [Node|Siblings];
 
     build_nodes([]) -> [].
+
+!SLIDE smaller
+    split_list(MinIndent, Children, [First|Rest]) ->
+        if 
+            First#line.indent > MinIndent ->
+                split_list(MinIndent, [First|Children], Rest);
+            true ->
+                {lists:reverse(Children), [First|Rest]}
+        end;
+
+    split_list(_Indent, Children, []) ->
+        {lists:reverse(Children), []}.
+
