@@ -68,20 +68,6 @@
             return output;
         }
 
-!SLIDE small
-        def process(input)
-            output = []
-            input.each() { |thing|
-                output.put(do_stuff(thing))
-            }
-            output
-        end
-
-!SLIDE small
-        def process(input)
-            input.map { |thing| do_stuff(thing) }
-        end
-
 !SLIDE
         process(Output, [First|Rest]) ->
             NewFirst = do_stuff(First),

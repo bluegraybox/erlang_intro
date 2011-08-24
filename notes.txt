@@ -6,13 +6,13 @@ What's cool about Erlang
         update code while running
     But what do I use it for
         how do I get started?
-        You don't want to be building applications like that in a language you don't know
+        don't want to build apps like that in a language you don't know
         I have trouble coming up with a project that needs all that
     Elegance
         concise & expressive
         part of what's cool about Erlang is what's cool about functional languages
-        special features - invert conventional view: what makes it strange makes it beautiful
-        escript - who knew?
+        particularly neat features
+        invert conventional view: what makes it strange makes it beautiful
 
 Procedural, OO, Functional
         programming styles
@@ -36,17 +36,18 @@ Procedural, OO, Functional
         more like doing proofs
         Rewire your brain: cool, not as hard as it sounds, "math revelation payoff"
         De Morgan's laws
-    Why?
     Math vs. Play Doh
         procedural like rambing stories
-        OO - lots of structure for the sake of structure; complexity begets complexity
+        OO - structure for the sake of structure; complexity begets complexity
             easy to write lot of code - "Wait, what was the question?"
         functional - focus: inputs & outputs
+    Why?
         ok, enough philosophizing
 
 Reading Erlang in 2 min
     Where are my curly braces?
-        "weird" = "doesn't look like C," unlike Java, Javascript, C#, Php, Perl, Python, Ruby
+        "weird" = "doesn't look like C"
+        unlike Java, Javascript, C#, Php, Perl, Python, Ruby
     comment
     atom - lowercase; :atom in Ruby, Enum in Java
     Variable - Java final
@@ -102,15 +103,13 @@ Indent Parser
         what does that look like?
     Java iteration
         simpler example
-    Ruby iteration
-    Ruby list comprehension
-        map your list to a new list where each thing has had stuff done to it
-        this is Ruby showing its Lisp influences
     Erlang recursion 1
         how do I move to the next element in the list?
+        like a proof: n -> n+1
     Erlang recursion 2
         how do I start? what do I do when I get to the end?
-        recursion in OO/procedural is rare and tricky; in functional, it's common and easy
+        recursion in OO/procedural is rare and tricky;
+            in functional, it's common and easy
     Thinker
         back to the problem at hand - how do I do this thing recursively
         think think think
@@ -121,26 +120,30 @@ Indent Parser
         I have children, and I'm the first of my siblings
         do this at each node
     recursive 2 & 3
-        what does the code look like? hold on; we don't have time for me to teach you to read Lisp
+        what does the code look like? don't have time to teach you to read Lisp
     Erlang: A Kinder, Gentler Lisp?
         hey, Erlang is also a functional language
         escript!
         translation was easy
         reworked to use pattern matching and guard idioms: nicer!
     Erlang build_nodes
-        list of lines in
-        create a node that knows its children, and put it at the front of a list of its siblings
+        input: list of lines
+        create a node that knows its children,
+            put it at the front of a list of its siblings
     Erlang split_list
-        like the earlier recursion, except we're not changing the elements, but we are stopping at some point
+        like the earlier recursion, except
+            we're not changing the elements,
+            but we are stopping at some point
 
 Bowling
     Scoring
         Spares & Strikes
-        OO awkwardness: Rolls sorta belong to frames, but may be counted for more than one
+        OO awkwardness:
+            Rolls sorta belong to frames, but may be counted for more than one
         Procedural: order matters
     Python
         Game, Frame - smart objects
-        53 LOC; it'd be longer in Java, just by the time you'd put in the curly braces
+        53 LOC; it'd be longer in Java because of curly braces alone
         tests: ~150 LOC
         felt pretty happy with it
     Erlang
@@ -159,7 +162,8 @@ Mirror
     easy to write a lot of "what if" code; let alone Java
     mind-altering, without that William Hurt turning into a monkey thing
 Erlang is elegant & natural
-    it's a little weird at first, but embrace the weirdness, and it starts to feel natural in a surprisingly short time
+    it's a little weird at first, but embrace the weirdness,
+        it starts to feel natural in a surprisingly short time
     patterns & idioms
     I've only written a couple hundred lines of Erlang
 Erlang is fun
@@ -167,7 +171,7 @@ Erlang is fun
 You can start small
 Know that you're writing code that will scale
     parser: new process for children and siblings add 2 lines of code
-        function call becomes spawn & receive, which are essentially one-line commands
+        func call becomes spawn & receive, which are essentially one-line cmds
 The End!
 Me
 
