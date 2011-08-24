@@ -88,8 +88,6 @@ Indent Parser
     Ruby
         data structures: Parser, Lines, Trees, Nodes, Leaves
     tree walk 1-5
-    command-line
-        output leaf nodes with paths
     Hackers & Painters
         essays by Paul Graham of y-combinator, hacker news
         transliterate Ruby to Lisp
@@ -119,7 +117,7 @@ Indent Parser
         at first node, break the rest of the data into Your Children and Not-
         I have children, and I'm the first of my siblings
         do this at each node
-    recursive 2 & 3
+    recursive 2-5
         what does the code look like? don't have time to teach you to read Lisp
     Erlang: A Kinder, Gentler Lisp?
         hey, Erlang is also a functional language

@@ -41,16 +41,6 @@
 !SLIDE center
 ![ruby step 5](ruby_parser_5.png)
 
-!SLIDE smaller commandline
-    $ echo -e "a\n b\n c\n  d\n e\nf\n g\n  h\n   i\n j\n k\nl" | ./parse_indents.rb 
-    a::b
-    a::c::d
-    a::e
-    f::g::h::i
-    f::j
-    f::k
-    l
-
 !SLIDE center
 ![Hackers & Painters](hackers.gif)
 <span class="credit">*Image from [O'Reilly Media](http://oreilly.com/catalog/9780596006624)*</span>
@@ -99,6 +89,12 @@
 
 !SLIDE center
 ![lisp step 3](lisp_parser_3.png)
+
+!SLIDE center
+![lisp step 4](lisp_parser_4.png)
+
+!SLIDE center
+![lisp step 5](lisp_parser_5.png)
 
 !SLIDE
 # Erlang: A kinder, gentler Lisp?
