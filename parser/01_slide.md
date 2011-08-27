@@ -59,18 +59,18 @@
         }
 
 !SLIDE
-        process(Output, [First|Rest]) ->
+        process([First|Rest], Output) ->
             NewFirst = do_stuff(First),
-            process([NewFirst|Output], Rest);
+            process(Rest, [NewFirst|Output]);
 
 !SLIDE
-        Output = process([], Input).
+        Output = process(Input, []).
 
-        process(Output, [First|Rest]) ->
+        process([First|Rest], Output) ->
             NewFirst = do_stuff(First),
-            process([NewFirst|Output], Rest);
+            process(Rest, [NewFirst|Output]);
 
-        process(Output, []) ->
+        process([], Output) ->
             lists:reverse(Output).
 
 !SLIDE center
