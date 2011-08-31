@@ -50,6 +50,7 @@
 <span class="credit">*Image from [IMLS DCC](http://www.flickr.com/photos/imlsdcc/5576592397/)*</span>
 
 !SLIDE small
+    @@@ java
         String[] process(String[] input) {
             String[] output = new String[input.length];
             for (int i=0; i < input.length; i++) {
@@ -59,11 +60,13 @@
         }
 
 !SLIDE
+    @@@ erlang
         process([First|Rest], Output) ->
             NewFirst = do_stuff(First),
             process(Rest, [NewFirst|Output]);
 
 !SLIDE
+    @@@ erlang
         Output = process(Input, []).
 
         process([First|Rest], Output) ->
@@ -100,6 +103,7 @@
 # Erlang: A kinder, gentler Lisp?
 
 !SLIDE smaller
+    @@@ erlang
     -record(line, {content, indent}).
     -record(node, {content, children}).
 
@@ -114,6 +118,7 @@
     build_nodes([]) -> [].
 
 !SLIDE smaller
+    @@@ erlang
     split_list(MinIndent, Children, [First|Rest]) ->
         if 
             First#line.indent > MinIndent ->
