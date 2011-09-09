@@ -277,19 +277,19 @@ Then I could write a script to parse it and list my next actions by context in t
 I never got that far.
 I got as far as writing a Ruby script to parse the indented text into a logical tree structure,
 that would turn this
-![Input](parser/input.png)
+![Input](../../raw/master/parser/input.png)
 into this
-![Output](parser/structure.png)
+![Output](../../raw/master/parser/structure.png)
 
 It had the OO structure you'd expect: Parser, Lines, Trees, Nodes, Leaves.
 It took each input line, and tacked it on to the tree in the next appropriate spot,
 building it out like so:
 
-![ruby step 1](ruby_parser_1.png)
-![ruby step 2](ruby_parser_2.png)
-![ruby step 3](ruby_parser_3.png)
-![ruby step 4](ruby_parser_4.png)
-![ruby step 5](ruby_parser_5.png)
+![ruby step 1](../../raw/master/ruby_parser_1.png)
+![ruby step 2](../../raw/master/ruby_parser_2.png)
+![ruby step 3](../../raw/master/ruby_parser_3.png)
+![ruby step 4](../../raw/master/ruby_parser_4.png)
+![ruby step 5](../../raw/master/ruby_parser_5.png)
 
 That much went well, and I felt pretty good about it.
 I thought I had a nice clean separation of reponsibilities, and some pretty concise code.
@@ -372,25 +372,25 @@ Every other line either belongs to one of its children, or one of its siblings.
 So you can run through the lines until you hit one with the same indent as yours.
 That'll be your first sibling; everything before it belongs to your children.
 
-![lisp step 1](lisp_parser_1.png)
+![lisp step 1](../../raw/master/lisp_parser_1.png)
 
 All you have to do now is recurse and apply the same logic to each block.
 Your first child (if any) splits its list into its children and siblings.
 Your first sibling (if any) does the same with its list.
 
-![lisp step 2](lisp_parser_2.png)
+![lisp step 2](../../raw/master/lisp_parser_2.png)
 
 And so on...
 
-![lisp step 3](lisp_parser_3.png)
+![lisp step 3](../../raw/master/lisp_parser_3.png)
 
 And so on...
 
-![lisp step 4](lisp_parser_4.png)
+![lisp step 4](../../raw/master/lisp_parser_4.png)
 
 And so on...
 
-![lisp step 5](lisp_parser_5.png)
+![lisp step 5](../../raw/master/lisp_parser_5.png)
 
 ...Until you're all the way down at the leaf nodes.
 Here, the logic is trivial: No lines, no children, no siblings.
