@@ -319,6 +319,8 @@ Most of all, it *felt* wrong.
 It felt like I was trying to jam a square peg into a round hole.
 So how could I do this in a more "Lisp-y" way?
 
+### Recursion
+
 Lisp is all about recursion.
 You'd think that anything involving a tree structure would have to be recursive, but not really.
 The way I was going about it was actually very linear: taking the input one line at a time
@@ -365,6 +367,8 @@ In Erlang, it's how you do *everything*.
 Anything that you'd use any sort of loop structure for in another language, you do with recursion.
 You get used to it pretty fast.
 
+### Lisp
+
 So, back to the problem at hand: How do I do this parsing thing in a more recursive way?
 It ended up being the classic math problem experience.
 I beat my head against it for a couple hours, sketching out ideas in code, all of them abject failures.
@@ -410,6 +414,8 @@ Maybe porting from Lisp to Erlang would be fairly straightforward.
 As it turned out, not only was the straight conversion easy,
 but I was also able to go back and rework bits to take advantage of Erlang's pattern matching features to make it even cleaner and simpler.
 
+### Erlang
+
 Here's the core of the Erlang functionality.
 We define records - data structures - for our input lines and output nodes.
 We pop the first line off the list, and split the rest of it into child and sibling lines.
@@ -447,46 +453,103 @@ If that doesn't happen before its sibling list is empty, it's all children and n
     split_list(_Indent, Children, []) ->
         {lists:reverse(Children), []}.
 
+I'm not sure if that's actually fewer lines of code than the equivalent procedural code, but it feels clearer.
+The stop condition is unambiguous, as opposed to the usual "i >= list.length".
 
-Bowling
-    Scoring
-        Spares & Strikes
-        OO awkwardness:
-            Rolls sorta belong to frames, but may be counted for more than one
-        Procedural: order matters
-    Python
-        Game, Frame - smart objects
-        53 LOC; it'd be longer in Java because of curly braces alone
-        tests: ~150 LOC
-        felt pretty happy with it
-    Erlang
-        11 lines
-        frame takes frame number, current score, remaining rolls
-        consumes rolls, boosts score, recurses
-        17 lines after handling invalid input, incomplete games
+## Bowling
 
-    Test code
-        unit test framework? why bother?
-        erlang functional test is simpler than the python unit tests
+I stumbled across another good example in the Bowling Game.
+The challenge is just to write a program to score a bowling game.
+This is a classic beginner coding exercise.
+It's very self-contained, but it has just enough complexity and ambiguity to be interesting.
 
-Mirror
-In Python, you spend a lot of time on these peripheral issues: What is the nature of a Frame? How does it relate to the Frames around it? Does it bear responsibility for calculating its own value, or does that fall to the Game class? It gets very metaphysical.
-    Python now: "It's clearly very busy, but what is it doing?!"
-    ambiguous responsibility - who does what? who checks for bad data? everyone!
-    model possible interactions, not actual
-    easy to write a lot of "what if" code; let alone Java
-    mind-altering, without that William Hurt turning into a monkey thing
-Erlang is elegant & natural
-    it's a little weird at first, but embrace the weirdness,
-        it starts to feel natural in a surprisingly short time
-    patterns & idioms
-    I've only written a couple hundred lines of Erlang
-Erlang is fun
-    little brain chemical reward signals
-You can start small
-Know that you're writing code that will scale
-    parser: new process for children and siblings add 2 lines of code
-        func call becomes spawn & receive, which are essentially one-line cmds
-The End!
-Me
+When you're programming in OO languages, there's a pretty obvious class structure.
+You have Games and Frames and Rolls, and you calculate a score.
+What makes this interesting is that spares and strikes cause rolls from future frames to be added to the score for that frame.
+This gives you a bit of metaphor shear.
+Rolls belong to one frame, but may be counted double or even triple.
+Do you put that logic in the Frame class, requiring frames to know about their following frames?
+Or do you put it in the Game, as the keeper of inter-frame knowledge?
+
+I had written this in Python as part of a pair programming exercise about a year ago.
+I was pretty happy with the results.
+The code itself was fifty-some lines.
+There was a clean separation of responsibilities.
+The Frame class had all sorts of useful methods for querying its state.
+The Game class hid all that and provided a clean interface for adding rolls and getting the score.
+
+Then for an Erlang meetup, we did the same exercise.
+This was the result:
+
+    score(Rolls) -> frame(Rolls, 1, 0).
+
+    frame(_BonusRolls, 11, Score) -> Score;
+
+    frame([10|Rest], Frame, Score) ->
+        [Bonus1, Bonus2|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1 + Bonus2);
+
+    frame([First,Second|Rest], Frame, Score) when (First+Second==10)->
+        [Bonus1|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1);
+
+    frame([First,Second|Rest], Frame, Score) ->
+        frame(Rest, Frame + 1, Score + First + Second).
+
+That's ten lines of code, a 5x improvement over Python.
+And (again, once you get used to Erlang's syntax) it's amazingly clear.
+frame() takes a list of remaining rolls, a frame number, and a total score.
+The different definitions of frame() handle the end-of-game, strike, spare, and normal conditions.
+Each consumes rolls, boosts the score, and recurses to the next frame.
+
+So what about unit tests?
+Here you go:
+
+    test() ->
+        test(0,   [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0]),
+        test(20,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1]),
+        test(150, [5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5]),
+        test(47,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 10 ,9]),
+        test(173, [7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 10]),
+
+    test(Expected, Rolls) ->
+        case score(Rolls) of
+            Expected -> io:fwrite("Pass~n");
+            Scored -> io:fwrite("Fail: expected=~p, scored=~p~n",
+                [Expected, Scored])
+        end.
+
+That's it: a list of test cases with expected result and input rolls;
+and a simple method for evaluating them.
+There are unit test frameworks for Erlang, but why bother when it's as simple as this?
+
+## The Funhouse Mirror
+
+Looking back at the Python code, I realize that it spends lot of time on peripheral issues:
+What is the nature of a Frame?
+How does it relate to the Frames around it?
+Is it responsible for validating its inputs, or does the Game do that?
+(Usually both, which makes for some redundancy.)
+Does it bear responsibility for calculating its own value, or does that also fall to the Game class?
+What's the "right" way to divide up functionality that involves two or more classes?
+It gets very metaphysical.
+
+And in the end, these questions have no direct bearing on the task of calculating the score.
+They're all about the model, which is just an intermediate stage between input and output.
+You also tend to end up with a lot of "what if?" code: functions that could be useful, but aren't actually used.
+You get boilerplate accessor methods.
+After working with Erlang for a bit, OO code seems to spend a lot of time talking about the problem without actually solving it.
+You look at all these interlocking parts and think, "Well! It certainly is very busy, but what is it actually doing?"
+Erlang takes more up-front thought,
+but is it really a good sign that you can write a lot of OO model code without really understanding what you're trying to accomplish?
+
+So I say, Embrace the weirdness.
+Give Erlang a shot.
+Spend a few hours - it shouldn't take long.
+The syntax and idioms start to feel natural in a surprisingly short time.
+Even if you never get to use it for work, it'll change the way you think about programming.
+
+Remember that you can start small, that you can write Erlang programs that aren't distributed or concurrent.
+You can write little shell scripts or file parsers or cgi scripts.
+And you can be secure in the knowledge that you could scale if you had to, without having to significantly re-work your code.
 
