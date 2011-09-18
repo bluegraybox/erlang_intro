@@ -15,7 +15,7 @@ That is in fact amazingly cool stuff, but what do I do with it?
 I don't run into a lot of problems that require that massive scale of solution.
 I run into a lot of problems that require some quick little scripty thing.
 Maybe bigger ones might run to a few hundred lines of code.
-If I *did* have to build something massively scalable, I'd be leary of doing it in a language I didn't know.
+If I *did* have to build something massively scalable, I'd be leery of doing it in a language I didn't know.
 There's a chicken-and-egg problem here.
 
 I'd like to take a different look at Erlang, one that might help break that deadlock.
@@ -126,6 +126,9 @@ So, to start with the basics of Erlang:
     [1,2,3]  % list
     {1,2,3}  % tuple
 
+For the purpose of *reading* Erlang, tuples are pretty much like lists.
+When you're *writing* Erlang, you'll need to know when to use which.
+
 You can do multi-assignments with lists like so:
 
     [X, Y, Z] = [1, 2, 3]  % X=1, Y=2, Z=3
@@ -163,7 +166,7 @@ You can overload functions, defining different versions of a function with the s
     my_func(Param1, Param2) ->
         %% actually do stuff...
 
-Erlang takes overriding a step further, and lets you do it by *value*.
+Erlang takes this a step further, and lets you override by *value*.
 
     my_func([]) -> ...
 
@@ -215,8 +218,11 @@ That may seem a little bizarre, but it makes for very elegant error handling:
     end.
 
 Essentially, this says that if the return status of file:open() is 'ok', then 
+
     Output = process_file(Handle)
+
 If it's 'error', then log it and set
+
     Output = []
 
 Now, turning your Erlang code into a command-line script is as simple as this:
@@ -284,7 +290,7 @@ into this
 
 ![Output](../../raw/master/parser/structure.png)
 
-It had the OO structure you'd expect: Parser, Lines, Trees, Nodes, Leaves.
+It had the OO structure you'd expect: Parser, Lines, Trees, and Nodes.
 It took each input line, and tacked it on to the tree in the next appropriate spot,
 building it out like so:
 
