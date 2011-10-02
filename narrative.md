@@ -294,15 +294,7 @@ It had the OO structure you'd expect: Parser, Lines, Trees, and Nodes.
 It took each input line, and tacked it on to the tree in the next appropriate spot,
 building it out like so:
 
-![ruby step 1](../../raw/master/parser/ruby_parser_1.png)
-
-![ruby step 2](../../raw/master/parser/ruby_parser_2.png)
-
-![ruby step 3](../../raw/master/parser/ruby_parser_3.png)
-
-![ruby step 4](../../raw/master/parser/ruby_parser_4.png)
-
-![ruby step 5](../../raw/master/parser/ruby_parser_5.png)
+![ruby parser](../../raw/master/parser/ruby_parser.gif)
 
 That much went well, and I felt pretty good about it.
 I thought I had a nice clean separation of reponsibilities, and some pretty concise code.

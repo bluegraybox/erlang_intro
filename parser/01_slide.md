@@ -27,19 +27,7 @@
 <span class="credit">*Image from [Wikimedia Commons](http://en.wikipedia.org/wiki/File:Ruby_logo.svg)*</span>
 
 !SLIDE center
-![ruby step 1](ruby_parser_1.png)
-
-!SLIDE center
-![ruby step 2](ruby_parser_2.png)
-
-!SLIDE center
-![ruby step 3](ruby_parser_3.png)
-
-!SLIDE center
-![ruby step 4](ruby_parser_4.png)
-
-!SLIDE center
-![ruby step 5](ruby_parser_5.png)
+![ruby parser](ruby_parser.gif)
 
 !SLIDE center
 ![Hackers & Painters](hackers.gif)
