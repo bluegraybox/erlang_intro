@@ -1,0 +1,15 @@
+.credit, .credit a, .aside {
+    color: #888;
+}
+.credit, .credit a {
+    font-size: medium;
+}
+.error {
+    color: red;
+}
+
+.bullets.code ul li {
+    text-align: left;
+    padding: 10px 25px;
+}
+
