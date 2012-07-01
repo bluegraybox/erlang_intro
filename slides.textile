@@ -1,0 +1,490 @@
+code-engine: sh
+
+author: Colin MacDonald
+email: colin@bluegraybox.com
+title: Erlang Intro
+footer: 
+subfooter: 
+{% css %}
+.syntaxhighlighter {
+    padding: 0.2em 0 0.2em 1em;
+    margin: 0 0 0 0 !important;
+    width: 100%;
+}
+.syntaxhighlighter table td.code .line {
+    padding: 0 0 0 0 !important;
+}
+.code {
+    background-color: #DDDDDD;
+    padding: 1px;
+}
+.slide h1 {
+    text-align: left;
+    color: #FF6633;
+}
+.codeurl {
+    color: grey;
+    font-style: italic;
+}
+body {
+    color: grey;
+}
+small {
+    color: lightgrey;
+}
+.author {
+    color: grey;
+    font-style: italic;
+    margin-top: 6em;
+}
+table.author td {
+    padding-left: 4em;
+}
+table.author td:first-child {
+    padding-left: 0;
+}
+li.none {
+    list-style-type: none;
+}
+a:link, a:visited {
+    color: grey;
+    text-decoration: none;
+}
+.credit, .credit a, .aside {
+    color: #888;
+}
+.credit, .credit a {
+    font-size: medium;
+}
+.error {
+    color: red;
+}
+
+.bullets.code ul li {
+    text-align: left;
+    padding: 10px 25px;
+}
+{% end %}
+
+h1. Erlang: Your New Favorite Scripting Language?
+
+h1. What's cool about Erlang?
+
+!SLIDE
+
+p=. !intro/factory-crop.jpg(Scalability)!
+
+p=(credit). "Image by joguldi":http://www.flickr.com/photos/landschaft/1177773469/
+
+h1. Ok, but what do I do with it?
+
+!SLIDE
+
+p=. !intro/carving.jpg(Elegance)!
+
+p=(credit). "Image by Stephen A. Wolfe":http://www.flickr.com/photos/swolfe/5800097543/
+
+!SLIDE
+
+*(none) Procedural
+*(none) Object-Oriented
+*(none) Functional
+
+!SLIDE
+
+p=. !language_styles/storytelling.jpg(Narrative)!
+
+p=(credit). "Image from Pratham Books":http://www.flickr.com/photos/prathambooks/3378156185/
+
+!SLIDE
+
+p=. !language_styles/machine.jpg(Things that do things)!
+
+p=(credit). "Image from Fr&eacute;d&eacute;ric Bisson":http://www.flickr.com/photos/zigazou76/3600019451/
+
+!SLIDE
+
+p=. !language_styles/connections.jpg(Relationships)!
+
+p=(credit). "Image from TheIguana":http://www.flickr.com/photos/51035797337@N01/3012247640/
+
+!SLIDE
+
+p=. f(x)
+
+p=. _What does that even mean?_
+
+!SLIDE
+
+p=. !language_styles/play-doh.jpg(OO vs. Functional)!
+
+p=(credit). "Image from Yun Huang Yong":http://www.flickr.com/photos/goosmurf/3727530095/
+
+h1. Why?
+
+*(none) 1 + 2 + 3 + 4 + 5 + ... + n
+*(none) n(n+1)/2
+
+h1. Where are my curly braces?!
+
+!SLIDE
+
+*(none) _% comment_
+
+!SLIDE
+
+*(none) atom
+*(none) 'atom'
+*(aside none) but not "atom"
+
+!SLIDE
+*(none) Variable
+
+!SLIDE
+*(none) [1, 2, 3]  %  list
+*(none) {1, 2, 3}  %  tuple
+
+!SLIDE
+*(none) [X, Y, Z] = [1, 2, 3]
+
+!SLIDE
+*(none) [First, Second | Rest] = [1, 2, 3, 4]
+*(none) [First, Second | Rest] = [1, 2]
+*(none) %[First, Second] = [1, 2, 3, 4]%(error)
+*(none) [First, Second | _ ] = [1, 2, 3, 4]
+*(none) [First, Second | _Rest ] = [1, 2, 3, 4]
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    my_func(Param1, ... ) ->
+        %% intermediate stuff
+        Value.
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    f(X) -> X * 2.
+{% end %}
+
+!SLIDE
+
+p=. !syntax/overload.jpg(Overload)!
+
+p=(credit). "Image by Graeme Newcomb":http://www.flickr.com/photos/graemenewcomb/
+
+!SLIDE
+
+{% code lang=erlang line_numbers=false %}
+    my_func(Param1) ->
+        my_func(Param1, "default").
+
+    my_func(Param1, Param2) ->
+        %% actually do stuff...
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    my_func([]) -> ...
+
+    my_func([Only]) -> ...
+
+    my_func([First, Second | Rest]) -> ...
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    my_func(0) -> ...
+
+    my_func(X) where X > 0 -> ...
+
+    my_func(X) where X < 0 -> ...
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    if
+        X >= 100 -> 100;
+        X >= 0   -> X;
+        true     -> 0
+    end
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    case my_func(X) of
+        error -> [];
+        List -> List
+    end
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    Output = case file:open(Filename, [read]) of
+        {ok, Handle} ->
+            process_file(Handle);
+        {error, Reason} ->
+            log_error(Reason, Filename),
+            []
+    end.
+{% end %}
+
+*(aside none) Output = process_file(Handle)
+*(aside none) Output = []
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    #!/usr/bin/escript
+
+    main(_Args) ->
+        io:format("Hello World!~n").
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    #!/usr/bin/escript
+
+    main(Args) -> main("World", Args).
+
+    main(_, ["-h" | _Args]) ->
+        io:format("Help! Help!~n");
+
+    main(_, ["-n", Name | Args]) ->
+        main(Name, Args);
+
+    main(Name, []) ->
+        io:format("Hello, ~s!~n", [Name]).
+{% end %}
+
+!SLIDE
+
+p=. !parser/detour.jpg(Detour)!
+
+p=(credit). "Image by chrisdlugosz":http://www.flickr.com/photos/chrisdlugosz/2805048271/
+
+!SLIDE
+
+pre.        project
+            action
+            sub-project
+                action
+            action
+        project
+            sub-project
+                sub-project
+                    action
+
+!SLIDE
+p=. @* work on presentation [computer, quiet] (2011-08-24) !!@
+
+!SLIDE
+
+p=. !parser/input.png(Input)!
+
+!SLIDE
+
+p=. !parser/structure.png(Output)!
+
+!SLIDE
+
+p=. !parser/ruby.png(Ruby)!
+
+p=(credit). "Image from Wikimedia Commons":http://en.wikipedia.org/wiki/File:Ruby_logo.svg
+
+!SLIDE
+
+p=. !parser/ruby_parser.gif(ruby parser)!
+
+!SLIDE
+
+p=. !parser/hackers.gif(Hackers & Painters)!
+
+p=(credit). "Image from O'Reilly Media":http://oreilly.com/catalog/9780596006624
+
+!SLIDE
+
+p=. !parser/train.jpg(Train Wreck)!
+
+p=(credit). "Image from IMLS DCC":http://www.flickr.com/photos/imlsdcc/5576592397/
+
+!SLIDE
+{% code lang=java line_numbers=false %}
+    String[] process(String[] input) {
+        String[] output = new String[input.length];
+        for (int i=0; i < input.length; i++) {
+            output[i] = do_stuff(input[i]);
+        }
+        return output;
+    }
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    process([First|Rest], Output) ->
+        NewFirst = do_stuff(First),
+        process(Rest, [NewFirst|Output]);
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    Output = process(Input, []).
+
+    process([First|Rest], Output) ->
+        NewFirst = do_stuff(First),
+        process(Rest, [NewFirst|Output]);
+
+    process([], Output) ->
+        lists:reverse(Output).
+{% end %}
+
+!SLIDE
+
+p=. !parser/thinker.jpg(thinking)!
+
+p=(credit). "Image by Brian Hillegas":http://www.flickr.com/photos/seatbelt67/502255276/
+
+!SLIDE
+
+p=. !parser/despair.jpg(more thinking)!
+
+p=(credit). "Image by Alex E. Proimos":http://www.flickr.com/photos/proimos/4199675334/
+
+!SLIDE
+
+p=. !parser/lisp_parser_1.png(lisp step 1)!
+
+!SLIDE
+
+p=. !parser/lisp_parser_2.png(lisp step 2)!
+
+!SLIDE
+
+p=. !parser/lisp_parser_3.png(lisp step 3)!
+
+!SLIDE
+
+p=. !parser/lisp_parser_4.png(lisp step 4)!
+
+!SLIDE
+
+p=. !parser/lisp_parser_5.png(lisp step 5)!
+
+h1. Erlang: A kinder, gentler Lisp?
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    -record(line, {content, indent}).
+    -record(node, {content, children}).
+
+    build_nodes([First|Rest]) ->
+        {ChildLines, SiblingLines} =
+            split_list(First#line.indent, [], Rest),
+        Children = build_nodes(ChildLines),
+        Siblings = build_nodes(SiblingLines),
+        Node = #node{content=First#line.content, children=Children},
+        [Node|Siblings];
+
+    build_nodes([]) -> [].
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    split_list(MinIndent, Children, [First|Rest]) ->
+        if 
+            First#line.indent > MinIndent ->
+                split_list(MinIndent, [First|Children], Rest);
+            true ->
+                {lists:reverse(Children), [First|Rest]}
+        end;
+
+    split_list(_Indent, Children, []) ->
+        {lists:reverse(Children), []}.
+{% end %}
+
+!SLIDE
+
+p=. !bowling/bowling.jpg(bowling)!
+
+p=(credit). "Image by Sam Howzit":http://www.flickr.com/photos/aloha75/4632129086/
+
+!SLIDE
+
+p=. !bowling/Python_logo.png(Python)!
+
+p=(credit). "Image from Wikipedia":http://en.wikipedia.org/wiki/File:Python_logo.svg
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    score(Rolls) -> frame(Rolls, 1, 0).
+
+    frame(_BonusRolls, 11, Score) -> Score;
+
+    frame([10|Rest], Frame, Score) ->
+        [Bonus1, Bonus2|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1 + Bonus2);
+
+    frame([First,Second|Rest], Frame, Score) when (First+Second==10)->
+        [Bonus1|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1);
+
+    frame([First,Second|Rest], Frame, Score) ->
+        frame(Rest, Frame + 1, Score + First + Second).
+{% end %}
+
+!SLIDE
+{% code lang=erlang line_numbers=false %}
+    test() ->
+        test(0,   [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0]),
+        test(20,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1]),
+        test(150, [5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5]),
+        test(47,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 10 ,9]),
+        test(173, [7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 10]),
+
+    test(Expected, Rolls) ->
+        case score(Rolls) of
+            Expected -> io:fwrite("Pass~n");
+            Scored -> io:fwrite("Fail: expected=~p, scored=~p~n",
+                [Expected, Scored])
+        end.
+{% end %}
+
+!SLIDE
+
+p=. !wrapup/reflection.jpg(Reflection)!
+
+p=(credit). "Image by Foxtongue":http://www.flickr.com/photos/foxtongue/4054387979/
+
+!SLIDE
+
+p=. !wrapup/bonsai.jpg(Bonsai)!
+
+p=(credit). "Image by Cass Chin":http://www.flickr.com/photos/casschin/4308140122/
+
+!SLIDE
+
+p=. !wrapup/fun.jpg(Fun)!
+
+p=(credit). "Image by orsocurioso":http://www.flickr.com/photos/orsocurioso/5425520904/
+
+!SLIDE
+
+p=. !wrapup/shed.jpg(Start Small)!
+
+p=(credit). "Image by Shedking":http://www.flickr.com/photos/30868960@N03/2967420422/
+
+!SLIDE
+
+p=. !wrapup/shedstack.jpg(Scale)!
+
+p=(credit). "Image by dullhunk":http://www.flickr.com/photos/dullhunk/2859826117/
+
+!SLIDE
+
+p=. !wrapup/end.jpg(The End)!
+
+p=(credit). "Image by somethingcommon":http://www.flickr.com/photos/vagabondvisions/1849461690/
+
+h1. Colin MacDonald
+*(none) "colin@bluegraybox.com":mailto:colin@bluegraybox.com
+*(none) "http://bluegraybox.com":http://bluegraybox.com
+*(none) "https://github.com/bluegraybox/examples/":https://github.com/bluegraybox/examples/
+
