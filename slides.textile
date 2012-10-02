@@ -372,32 +372,14 @@ h1. Erlang: A kinder, gentler Lisp?
 
 !SLIDE
 {% code lang=erlang line_numbers=false %}
-    -record(line, {content, indent}).
-    -record(node, {content, children}).
-
-    build_nodes([First|Rest]) ->
-        {ChildLines, SiblingLines} =
-            split_list(First#line.indent, [], Rest),
+    build_nodes([{Content, Indent}|Rest]) ->
+        IsChild = fun({_C, I}) -> I > Indent end,
+        {ChildLines, SiblingLines} = lists:splitwith(IsChild, Rest),
         Children = build_nodes(ChildLines),
         Siblings = build_nodes(SiblingLines),
-        Node = #node{content=First#line.content, children=Children},
-        [Node|Siblings];
+        [{Content, Children}|Siblings];
 
     build_nodes([]) -> [].
-{% end %}
-
-!SLIDE
-{% code lang=erlang line_numbers=false %}
-    split_list(MinIndent, Children, [First|Rest]) ->
-        if 
-            First#line.indent > MinIndent ->
-                split_list(MinIndent, [First|Children], Rest);
-            true ->
-                {lists:reverse(Children), [First|Rest]}
-        end;
-
-    split_list(_Indent, Children, []) ->
-        {lists:reverse(Children), []}.
 {% end %}
 
 !SLIDE
@@ -486,5 +468,6 @@ p=(credit). "Image by somethingcommon":http://www.flickr.com/photos/vagabondvisi
 h1. Colin MacDonald
 *(none) "colin@bluegraybox.com":mailto:colin@bluegraybox.com
 *(none) "http://bluegraybox.com":http://bluegraybox.com
-*(none) "https://github.com/bluegraybox/examples/":https://github.com/bluegraybox/examples/
+*(none) "https://github.com/bluegraybox/erlang_intro/":https://github.com/bluegraybox/erlang_intro/
+*(none) "http://bluegraybox.github.com/erlang_intro/":http://bluegraybox.github.com/erlang_intro/
 
