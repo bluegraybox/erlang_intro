@@ -1,395 +1,578 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Erlang Intro</title>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
+   <title>Erlang Intro</title>
 
-  <meta name="viewport" content="width=device-width"/>
+<meta name="generator" content="Slide Show (S9) 1.2.3 on Ruby 1.9.3 (2012-04-20) [x86_64-linux]">
+<meta name="author"    content="Colin MacDonald" >
 
-  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
-  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+<!-- SyntaxHighlighter (sh) style sheet; goes first so we can override styles if needed -->
+<!-- todo: add theme-ing support -->
+<link rel="stylesheet" href="highlighter/shCoreDefault.css">
 
-  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
-  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
-	<script type="text/javascript" src="./js/jquery-print.js"></script>
-  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+<!-- S6 style sheet links -->
+<link rel="stylesheet" href="slides.css"  media="projection" id="styleProjection">
+<link rel="stylesheet" href="s6/screen.css"          media="screen" id="styleScreen">
+<link rel="stylesheet" href="s6/print.css"           media="print">
 
-  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+<!-- S6 JS -->
+<script src="s6/jquery.js"></script>
+<script src="s6/jquery.slideshow.js"></script>
 
-  <script type="text/javascript" src="./js/fg.menu.js"></script>
-  <script type="text/javascript" src="./js/showoff.js"></script>
-  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
-  <script type="text/javascript" src="./js/sh_main.min.js"></script>
-  <script type="text/javascript" src="./js/core.js"></script>
-  <script type="text/javascript" src="./js/showoffcore.js"></script>
-  <script type="text/javascript" src="./js/coffee-script.js"></script>
+<!-- SyntaxHighlighter (sh) machinery -->
+<script src="highlighter/shCore.js"></script>
 
-  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
-  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
-  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+<!-- SyntaxHighlighter brushes, remove those for languages you don't need --> 
+<script src="highlighter/shBrushAppleScript.js"></script>
+<script src="highlighter/shBrushAS3.js"></script>
+<script src="highlighter/shBrushBash.js"></script>
+<script src="highlighter/shBrushColdFusion.js"></script>
+<script src="highlighter/shBrushCpp.js"></script>
+<script src="highlighter/shBrushCSharp.js"></script>
+<script src="highlighter/shBrushCss.js"></script>
+<script src="highlighter/shBrushDelphi.js"></script>
+<script src="highlighter/shBrushDiff.js"></script>
+<script src="highlighter/shBrushErlang.js"></script>
+<script src="highlighter/shBrushGroovy.js"></script>
+<script src="highlighter/shBrushJavaFX.js"></script>
+<script src="highlighter/shBrushJava.js"></script>
+<script src="highlighter/shBrushJScript.js"></script>
+<script src="highlighter/shBrushPerl.js"></script>
+<script src="highlighter/shBrushPhp.js"></script>
+<script src="highlighter/shBrushPlain.js"></script>
+<script src="highlighter/shBrushPowerShell.js"></script>
+<script src="highlighter/shBrushPython.js"></script>
+<script src="highlighter/shBrushRuby.js"></script>
+<script src="highlighter/shBrushSass.js"></script>
+<script src="highlighter/shBrushScala.js"></script>
+<script src="highlighter/shBrushSql.js"></script>
+<script src="highlighter/shBrushVb.js"></script>
+<script src="highlighter/shBrushXml.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+  Slideshow.init();
+  SyntaxHighlighter.all();
+} );
 
   
-    <link rel="stylesheet" href="file/presentation.css" type="text/css"/>
-  
+ 
+</script>
 
-  
+<!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
+<!--[if IE]>
+<script src="s6/jquery.microsoft.js"></script>
+<![endif]-->
 
-  <script type="text/javascript">
-  $(function(){
-      setupPreso(false, './');
-  });
-  </script>
+
 
 </head>
-
 <body>
 
-<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
-<div id="navigation" class="hidden"></div>
+<div class="layout"> 
+  <div id="header"></div>
+  <div id="footer">
+    <h1></h1>
+    <h2></h2>
+  </div>
+</div><!-- layout -->
 
-<div id="help">
-  <table>
-    <tr><td class="key">z, ?</td><td>toggle help (this)</td></tr>
-    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
-    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
-    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
-    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
-    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
-    <tr><td class="key">f</td><td>toggle footer</td></tr>
-    <tr><td class="key">r</td><td>reload slides</td></tr>
-    <tr><td class="key">n</td><td>toggle notes</td></tr>
-    <tr><td class="key">p</td><td>run preshow</td></tr>
-  </table>
+<div class="presentation">
+   
+<div class='slide '>
+
+<!-- _S9SLIDE_ -->
+<h1>Erlang: Your New Favorite Scripting Language?</h1>
+
 </div>
-
-<div class="buttonNav">
-  <input type="submit" onClick="prevStep();" value="prev"/>
-  <input type="submit" onClick="nextStep();" value="next"/>
+<div class='slide '>
+<!-- _S9SLIDE_ -->
+<h1>What&#8217;s cool about Erlang?</h1>
 </div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="intro/factory-crop.jpg" title="Scalability" alt="Scalability" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/landschaft/1177773469/">Image by joguldi</a></p>
 
-<div id="preso">loading presentation...</div>
-<div id="footer">
-  <span id="slideInfo"></span>
-  <span id="debugInfo"></span>
-  <span id="notesInfo"></span>
 </div>
-
-<div id="slides" class="offscreen" style="display:none;">
-<div class="slide" data-transition="none"><div class="content" ref="intro/01_slide/1">
-<h1>Erlang: Your New Favorite Scripting Language?</h1></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="intro/01_slide/2">
-<h1>What's cool about Erlang?</h1></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="intro/01_slide/3">
-<p><img src="./file/intro/factory-crop.jpg" alt="Scalability"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/landschaft/1177773469/">joguldi</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="intro/01_slide/4">
-<h1>Ok, but what do I do with it?</h1></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="intro/01_slide/5">
-<p><img src="./file/intro/carving.jpg" alt="Elegance"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/swolfe/5800097543/">Stephen A. Wolfe</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="language_styles/01_slide/1">
-<h1>Procedural</h1>
-
-<h1>Object-Oriented</h1>
-
-<h1>Functional</h1></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="language_styles/01_slide/2">
-<p><img src="./file/language_styles/storytelling.jpg" alt="Narrative"/>
-<span class="credit"><em>Image from <a href="http://www.flickr.com/photos/prathambooks/3378156185/">Pratham Books</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="language_styles/01_slide/3">
-<p><img src="./file/language_styles/machine.jpg" alt="Things that do things"/>
-<span class="credit"><em>Image from <a href="http://www.flickr.com/photos/zigazou76/3600019451/">Frdric Bisson</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="language_styles/01_slide/4">
-<p><img src="./file/language_styles/connections.jpg" alt="Relationships"/>
-<span class="credit"><em>Image from <a href="http://www.flickr.com/photos/51035797337@N01/3012247640/">TheIguana</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="language_styles/01_slide/5">
-<h1>f(x)</h1>
-
+<div class='slide '>
+<!-- _S9SLIDE_ -->
+<h1>Ok, but what do I do with it?</h1>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="intro/carving.jpg" title="Elegance" alt="Elegance" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/swolfe/5800097543/">Image by Stephen A. Wolfe</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li><em>What does that even mean?</em></li>
+	<li class="none">Procedural</li>
+	<li class="none">Object-Oriented</li>
+	<li class="none">Functional</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="language_styles/01_slide/6">
-<p><img src="./file/language_styles/play-doh.jpg" alt="OO vs. Functional"/>
-<span class="credit"><em>Image from <a href="http://www.flickr.com/photos/goosmurf/3727530095/">Yun Huang Yong</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="language_styles/01_slide/7">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="language_styles/storytelling.jpg" title="Narrative" alt="Narrative" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/prathambooks/3378156185/">Image from Pratham Books</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="language_styles/machine.jpg" title="Things that do things" alt="Things that do things" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/zigazou76/3600019451/">Image from Fr&eacute;d&eacute;ric Bisson</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="language_styles/connections.jpg" title="Relationships" alt="Relationships" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/51035797337@N01/3012247640/">Image from TheIguana</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;">f(x)</p>
+<p style="text-align:center;"><em>What does that even mean?</em></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="language_styles/play-doh.jpg" title="OO vs. Functional" alt="OO vs. Functional" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/goosmurf/3727530095/">Image from Yun Huang Yong</a></p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_ -->
 <h1>Why?</h1>
+<ul>
+	<li class="none">1 + 2 + 3 + 4 + 5 + &#8230; + n</li>
+	<li class="none">n(n+1)/2</li>
+</ul>
 
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_ -->
+<h1>Where are my curly braces?!</h1>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li>1 + 2 + 3 + 4 + 5 + ... + n</li>
-<li>n(n+1)/2</li>
+	<li class="none"><em>% comment</em></li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/1">
-<h1>Where are my curly braces?!</h1></div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="syntax/01/2">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li><em>% comment</em></li>
+	<li class="none">atom</li>
+	<li class="none">&#8216;atom&#8217;</li>
+	<li class="aside none">but not &#8220;atom&#8221;</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="syntax/01/3">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li>atom</li>
-<li>'atom'</li>
-<li><span class="aside"><em>but not "atom"</em></span></li>
+	<li class="none">Variable</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="syntax/01/4">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li>Variable</li>
+	<li class="none">[1, 2, 3]  %  list</li>
+	<li class="none">{1, 2, 3}  %  tuple</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="syntax/01/5">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li>[1, 2, 3]  <span class="aside"><em> list</em></span></li>
-<li>{1, 2, 3}  <span class="aside"><em> tuple</em></span></li>
+	<li class="none">[X, Y, Z] = [1, 2, 3]</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="syntax/01/6">
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
 <ul>
-<li>[X, Y, Z] = [1, 2, 3]</li>
+	<li class="none">[First, Second | Rest] = [1, 2, 3, 4]</li>
+	<li class="none">[First, Second | Rest] = [1, 2]</li>
+	<li class="none"><span>[First, Second] = [1, 2, 3, 4]</span>(error)</li>
+	<li class="none">[First, Second | _ ] = [1, 2, 3, 4]</li>
+	<li class="none">[First, Second | _Rest ] = [1, 2, 3, 4]</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="syntax/01/7">
-<ul>
-<li>[First, Second | Rest] = [1, 2, 3, 4]</li>
-<li>[First, Second | Rest] = [1, 2]</li>
-<li><span class="error">[First, Second] = [1, 2, 3, 4]</span></li>
-<li>[First, Second | _ ] = [1, 2, 3, 4]</li>
-<li>[First, Second | _Rest ] = [1, 2, 3, 4]</li>
-</ul>
-</div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/8">
-<pre class="sh_erlang"><code>    my_func(Param1, ... ) -&gt;
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    my_func(Param1, ... ) -&gt;
         %% intermediate stuff
-        Value.</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/9">
-<pre class="sh_erlang"><code>    f(X) -&gt; X * 2.</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="syntax/01/10">
-<p><img src="./file/syntax/overload.jpg" alt="Overload"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/graemenewcomb/">Graeme Newcomb</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content code" ref="syntax/01/11">
-<pre class="sh_erlang"><code>    my_func(Param1) -&gt;
-        my_func(Param1, "default").
+        Value.
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    f(X) -&gt; X * 2.
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="syntax/overload.jpg" title="Overload" alt="Overload" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/graemenewcomb/">Image by Graeme Newcomb</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    my_func(Param1) -&gt;
+        my_func(Param1, &quot;default&quot;).
 
     my_func(Param1, Param2) -&gt;
-        %% actually do stuff...</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content code" ref="syntax/01/12">
-<pre class="sh_erlang"><code>    my_func([]) -&gt; ...
+        %% actually do stuff...
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    my_func([]) -&gt; ...
 
     my_func([Only]) -&gt; ...
 
-    my_func([First, Second | Rest]) -&gt; ...</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/13">
-<pre class="sh_erlang"><code>    my_func(0) -&gt; ...
+    my_func([First, Second | Rest]) -&gt; ...
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    my_func(0) -&gt; ...
 
     my_func(X) where X &gt; 0 -&gt; ...
 
-    my_func(X) where X &lt; 0 -&gt; ...</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/14">
-<pre class="sh_erlang"><code>    if
+    my_func(X) where X &lt; 0 -&gt; ...
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    if
         X &gt;= 100 -&gt; 100;
         X &gt;= 0   -&gt; X;
         true     -&gt; 0
-    end</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="syntax/01/15">
-<pre class="sh_erlang"><code>    case my_func(X) of
+    end
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    case my_func(X) of
         error -&gt; [];
         List -&gt; List
-    end</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental small code" ref="syntax/01/16">
-<pre class="sh_erlang"><code>    Output = case file:open(Filename, [read]) of
+    end
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    Output = case file:open(Filename, [read]) of
         {ok, Handle} -&gt;
             process_file(Handle);
         {error, Reason} -&gt;
             log_error(Reason, Filename),
             []
-    end.</code></pre>
+    end.
+</pre></div>
+<!-- end code -->
 
 <ul>
-<li><span class="aside">Output = process_file(Handle)</span></li>
-<li><span class="aside">Output = []</span></li>
+	<li class="aside none">Output = process_file(Handle)</li>
+	<li class="aside none">Output = []</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content small" ref="syntax/01/17">
-<pre class="sh_erlang"><code>    #!/usr/bin/escript
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    #!/usr/bin/escript
 
     main(_Args) -&gt;
-        io:format("Hello World!~n").</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content small" ref="syntax/01/18">
-<pre class="sh_erlang"><code>    #!/usr/bin/escript
+        io:format(&quot;Hello World!~n&quot;).
+</pre></div>
+<!-- end code -->
 
-    main(Args) -&gt; main("World", Args).
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    #!/usr/bin/escript
 
-    main(_, ["-h" | _Args]) -&gt;
-        io:format("Help! Help!~n");
+    main(Args) -&gt; main(&quot;World&quot;, Args).
 
-    main(_, ["-n", Name | Args]) -&gt;
+    main(_, [&quot;-h&quot; | _Args]) -&gt;
+        io:format(&quot;Help! Help!~n&quot;);
+
+    main(_, [&quot;-n&quot;, Name | Args]) -&gt;
         main(Name, Args);
 
     main(Name, []) -&gt;
-        io:format("Hello, ~s!~n", [Name]).</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/1">
-<p><img src="./file/parser/detour.jpg" alt="Detour"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/chrisdlugosz/2805048271/">chrisdlugosz</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content code" ref="parser/01_slide/2">
-<pre><code>    project
-        action
-        sub-project
+        io:format(&quot;Hello, ~s!~n&quot;, [Name]).
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/detour.jpg" title="Detour" alt="Detour" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/chrisdlugosz/2805048271/">Image by chrisdlugosz</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<pre>       project
             action
-        action
-    project
-        sub-project
             sub-project
                 action
-</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content bullets small" ref="parser/01_slide/3">
-<ul>
-<li>work on presentation [computer, quiet] (2011-08-24) !!</li>
-</ul>
+            action
+        project
+            sub-project
+                sub-project
+                    action</pre>
 </div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/4">
-<p><img src="./file/parser/input.png" alt="Input"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/5">
-<p><img src="./file/parser/structure.png" alt="Output"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/6">
-<p><img src="./file/parser/ruby.png" alt="Ruby"/>
-<span class="credit"><em>Image from <a href="http://en.wikipedia.org/wiki/File:Ruby_logo.svg">Wikimedia Commons</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/7">
-<p><img src="./file/parser/ruby_parser.gif" alt="ruby parser"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/8">
-<p><img src="./file/parser/hackers.gif" alt="Hackers &amp; Painters"/>
-<span class="credit"><em>Image from <a href="http://oreilly.com/catalog/9780596006624">O'Reilly Media</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/9">
-<p><img src="./file/parser/train.jpg" alt="Train Wreck"/>
-<span class="credit"><em>Image from <a href="http://www.flickr.com/photos/imlsdcc/5576592397/">IMLS DCC</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content small" ref="parser/01_slide/10">
-<pre class="sh_java"><code>    String[] process(String[] input) {
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><code>* work on presentation [computer, quiet] (2011-08-24) !!</code></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/input.png" title="Input" alt="Input" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/structure.png" title="Output" alt="Output" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/ruby.png" title="Ruby" alt="Ruby" /></p>
+<p style="text-align:center;" class="credit"><a href="http://en.wikipedia.org/wiki/File:Ruby_logo.svg">Image from Wikimedia Commons</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/ruby_parser.gif" title="ruby parser" alt="ruby parser" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/hackers.gif" title="Hackers &amp; Painters" alt="Hackers &amp; Painters" /></p>
+<p style="text-align:center;" class="credit"><a href="http://oreilly.com/catalog/9780596006624">Image from O&#8217;Reilly Media</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/train.jpg" title="Train Wreck" alt="Train Wreck" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/imlsdcc/5576592397/">Image from IMLS DCC</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"java", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: java toolbar: false gutter: false'>
+    String[] process(String[] input) {
         String[] output = new String[input.length];
         for (int i=0; i &lt; input.length; i++) {
             output[i] = do_stuff(input[i]);
         }
         return output;
-    }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="parser/01_slide/11">
-<pre class="sh_erlang"><code>    process([First|Rest], Output) -&gt;
+    }
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    process([First|Rest], Output) -&gt;
         NewFirst = do_stuff(First),
-        process(Rest, [NewFirst|Output]);</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="parser/01_slide/12">
-<pre class="sh_erlang"><code>    Output = process(Input, []).
+        process(Rest, [NewFirst|Output]);
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    Output = process(Input, []).
 
     process([First|Rest], Output) -&gt;
         NewFirst = do_stuff(First),
         process(Rest, [NewFirst|Output]);
 
     process([], Output) -&gt;
-        lists:reverse(Output).</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/13">
-<p><img src="./file/parser/thinker.jpg" alt="thinking"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/seatbelt67/502255276/">Brian Hillegas</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/14">
-<p><img src="./file/parser/despair.jpg" alt="more thinking"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/proimos/4199675334/">Alex E. Proimos</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/15">
-<p><img src="./file/parser/lisp_parser_1.png" alt="lisp step 1"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/16">
-<p><img src="./file/parser/lisp_parser_2.png" alt="lisp step 2"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/17">
-<p><img src="./file/parser/lisp_parser_3.png" alt="lisp step 3"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/18">
-<p><img src="./file/parser/lisp_parser_4.png" alt="lisp step 4"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="parser/01_slide/19">
-<p><img src="./file/parser/lisp_parser_5.png" alt="lisp step 5"/></p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="parser/01_slide/20">
-<h1>Erlang: A kinder, gentler Lisp?</h1></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="parser/01_slide/21">
-<pre class="sh_erlang"><code>-record(line, {content, indent}).
--record(node, {content, children}).
+        lists:reverse(Output).
+</pre></div>
+<!-- end code -->
 
-build_nodes([First|Rest]) -&gt;
-    {ChildLines, SiblingLines} =
-        split_list(First#line.indent, [], Rest),
-    Children = build_nodes(ChildLines),
-    Siblings = build_nodes(SiblingLines),
-    Node = #node{content=First#line.content, children=Children},
-    [Node|Siblings];
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/thinker.jpg" title="thinking" alt="thinking" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/seatbelt67/502255276/">Image by Brian Hillegas</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/despair.jpg" title="more thinking" alt="more thinking" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/proimos/4199675334/">Image by Alex E. Proimos</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/lisp_parser_1.png" title="lisp step 1" alt="lisp step 1" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/lisp_parser_2.png" title="lisp step 2" alt="lisp step 2" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/lisp_parser_3.png" title="lisp step 3" alt="lisp step 3" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/lisp_parser_4.png" title="lisp step 4" alt="lisp step 4" /></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="parser/lisp_parser_5.png" title="lisp step 5" alt="lisp step 5" /></p>
 
-build_nodes([]) -&gt; [].</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="parser/01_slide/22">
-<pre class="sh_erlang"><code>split_list(MinIndent, Children, [First|Rest]) -&gt;
-    if 
-        First#line.indent &gt; MinIndent -&gt;
-            split_list(MinIndent, [First|Children], Rest);
-        true -&gt;
-            {lists:reverse(Children), [First|Rest]}
-    end;
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_ -->
+<h1>Erlang: A kinder, gentler Lisp?</h1>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    build_nodes([{Content, Indent}|Rest]) -&gt;
+        IsChild = fun({_C, I}) -&gt; I &gt; Indent end,
+        {ChildLines, SiblingLines} = lists:splitwith(IsChild, Rest),
+        Children = build_nodes(ChildLines),
+        Siblings = build_nodes(SiblingLines),
+        [{Content, Children}|Siblings];
 
-split_list(_Indent, Children, []) -&gt;
-    {lists:reverse(Children), []}.</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="bowling/01/1">
-<p><img src="./file/bowling/bowling.jpg" alt="bowling"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/aloha75/4632129086/">Sam Howzit</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="bowling/01/2">
-<p><img src="./file/bowling/Python_logo.png" alt="Python"/>
-<span class="credit"><em>Image from <a href="http://en.wikipedia.org/wiki/File:Python_logo.svg">Wikipedia</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="bowling/01/3">
-<pre class="sh_erlang"><code>score(Rolls) -&gt; frame(Rolls, 1, 0).
+    build_nodes([]) -&gt; [].
+</pre></div>
+<!-- end code -->
 
-frame(_BonusRolls, 11, Score) -&gt; Score;
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="bowling/bowling.jpg" title="bowling" alt="bowling" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/aloha75/4632129086/">Image by Sam Howzit</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="bowling/Python_logo.png" title="Python" alt="Python" /></p>
+<p style="text-align:center;" class="credit"><a href="http://en.wikipedia.org/wiki/File:Python_logo.svg">Image from Wikipedia</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    score(Rolls) -&gt; frame(Rolls, 1, 0).
 
-frame([10|Rest], Frame, Score) -&gt;
-    [Bonus1, Bonus2|_] = Rest,
-    frame(Rest, Frame + 1, Score + 10 + Bonus1 + Bonus2);
+    frame(_BonusRolls, 11, Score) -&gt; Score;
 
-frame([First,Second|Rest], Frame, Score) when (First+Second==10)-&gt;
-    [Bonus1|_] = Rest,
-    frame(Rest, Frame + 1, Score + 10 + Bonus1);
+    frame([10|Rest], Frame, Score) -&gt;
+        [Bonus1, Bonus2|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1 + Bonus2);
 
-frame([First,Second|Rest], Frame, Score) -&gt;
-    frame(Rest, Frame + 1, Score + First + Second).</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="bowling/01/4">
-<pre class="sh_erlang"><code>test() -&gt;
-    test(0,   [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0]),
-    test(20,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1]),
-    test(150, [5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5]),
-    test(47,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 10 ,9]),
-    test(173, [7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 10]),
+    frame([First,Second|Rest], Frame, Score) when (First+Second==10)-&gt;
+        [Bonus1|_] = Rest,
+        frame(Rest, Frame + 1, Score + 10 + Bonus1);
 
-test(Expected, Rolls) -&gt;
-    case score(Rolls) of
-        Expected -&gt; io:fwrite("Pass~n");
-        Scored -&gt; io:fwrite("Fail: expected=~p, scored=~p~n",
-            [Expected, Scored])
-    end.</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/1">
-<p><img src="./file/wrapup/reflection.jpg" alt="Reflection"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/foxtongue/4054387979/">Foxtongue</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/2">
-<p><img src="./file/wrapup/bonsai.jpg" alt="Bonsai"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/casschin/4308140122/">Cass Chin</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/3">
-<p><img src="./file/wrapup/fun.jpg" alt="Fun"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/orsocurioso/5425520904/">orsocurioso</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/4">
-<p><img src="./file/wrapup/shed.jpg" alt="Start Small"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/30868960@N03/2967420422/">Shedking</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/5">
-<p><img src="./file/wrapup/shedstack.jpg" alt="Scale"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/dullhunk/2859826117/">dullhunk</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="wrapup/01/6">
-<p><img src="./file/wrapup/end.jpg" alt="The End"/>
-<span class="credit"><em>Image by <a href="http://www.flickr.com/photos/vagabondvisions/1849461690/">somethingcommon</a></em></span></p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="wrapup/01/7">
+    frame([First,Second|Rest], Frame, Score) -&gt;
+        frame(Rest, Frame + 1, Score + First + Second).
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<!-- begin code{:lang=>"erlang", :line_numbers=>"false"} -->
+<div class='code'><pre class='brush: erlang toolbar: false gutter: false'>
+    test() -&gt;
+        test(0,   [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0]),
+        test(20,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1]),
+        test(150, [5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5,5, 5]),
+        test(47,  [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 10 ,9]),
+        test(173, [7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 7,3, 10]),
+
+    test(Expected, Rolls) -&gt;
+        case score(Rolls) of
+            Expected -&gt; io:fwrite(&quot;Pass~n&quot;);
+            Scored -&gt; io:fwrite(&quot;Fail: expected=~p, scored=~p~n&quot;,
+                [Expected, Scored])
+        end.
+</pre></div>
+<!-- end code -->
+
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/reflection.jpg" title="Reflection" alt="Reflection" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/foxtongue/4054387979/">Image by Foxtongue</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/bonsai.jpg" title="Bonsai" alt="Bonsai" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/casschin/4308140122/">Image by Cass Chin</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/fun.jpg" title="Fun" alt="Fun" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/orsocurioso/5425520904/">Image by orsocurioso</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/shed.jpg" title="Start Small" alt="Start Small" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/30868960@N03/2967420422/">Image by Shedking</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/shedstack.jpg" title="Scale" alt="Scale" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/dullhunk/2859826117/">Image by dullhunk</a></p>
+</div>
+<div class='slide '>
+<p><!-- _S9SLIDE_  --></p>
+<p style="text-align:center;"><img src="wrapup/end.jpg" title="The End" alt="The End" /></p>
+<p style="text-align:center;" class="credit"><a href="http://www.flickr.com/photos/vagabondvisions/1849461690/">Image by somethingcommon</a></p>
+
+</div>
+<div class='slide '>
+<!-- _S9SLIDE_ -->
 <h1>Colin MacDonald</h1>
+<ul>
+	<li class="none"><a href="mailto:colin@bluegraybox.com">colin@bluegraybox.com</a></li>
+	<li class="none"><a href="http://bluegraybox.com">http://bluegraybox.com</a></li>
+	<li class="none"><a href="https://github.com/bluegraybox/erlang_intro/">https://github.com/bluegraybox/erlang_intro/</a></li>
+	<li class="none"><a href="http://bluegraybox.github.com/erlang_intro/">http://bluegraybox.github.com/erlang_intro/</a></li>
+</ul></div>
 
-<h2><a href="mailto:colin@bluegraybox.com">colin@bluegraybox.com</a></h2>
 
-<h2><a href="http://bluegraybox.com">http://bluegraybox.com</a></h2>
-
-<h2><a href="https://github.com/bluegraybox/examples/">https://github.com/bluegraybox/examples/</a></h2></div>
-</div></div>
-
+</div><!-- presentation -->
 </body>
 </html>
