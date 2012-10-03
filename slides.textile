@@ -84,19 +84,13 @@ p=. !intro/carving.jpg(Elegance)!
 
 p=(credit). "Image by Stephen A. Wolfe":http://www.flickr.com/photos/swolfe/5800097543/
 
-!SLIDE
-
-*(none) Procedural
-*(none) Object-Oriented
-*(none) Functional
-
-!SLIDE
+h1. Procedural
 
 p=. !language_styles/storytelling.jpg(Narrative)!
 
 p=(credit). "Image from Pratham Books":http://www.flickr.com/photos/prathambooks/3378156185/
 
-!SLIDE
+h1.  Object-Oriented
 
 p=. !language_styles/machine.jpg(Things that do things)!
 
@@ -108,7 +102,7 @@ p=. !language_styles/connections.jpg(Relationships)!
 
 p=(credit). "Image from TheIguana":http://www.flickr.com/photos/51035797337@N01/3012247640/
 
-!SLIDE
+h1. Functional
 
 p=. f(x)
 
@@ -122,7 +116,15 @@ p=(credit). "Image from Yun Huang Yong":http://www.flickr.com/photos/goosmurf/37
 
 h1. Why?
 
+h3. Procedural
 *(none) 1 + 2 + 3 + 4 + 5 + ... + n
+
+h1. Why?
+
+h3. Procedural
+*(none) 1 + 2 + 3 + 4 + 5 + ... + n
+
+h3. Functional
 *(none) n(n+1)/2
 
 h1. Where are my curly braces?!
